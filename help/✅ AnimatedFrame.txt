@@ -2,11 +2,7 @@
 Вы просто создаёте объект AnimatedFrame, передаёте параметры, и анимация выполняется автоматически.
 
 Примеры:
-
 AnimatedFrame(root, animation="fade") — плавное появление
-
 AnimatedFrame(root, animation="slide", direction="right") — выезд справа налево
-
 AnimatedFrame(root, animation="zoom") — увеличение масштаба
-
 AnimatedFrame(root, animation="blink", speed=500, steps=10) — мигание (исчезновение и появление)
