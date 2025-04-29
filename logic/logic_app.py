@@ -1,30 +1,13 @@
-# main.py
+# logic_app.py
 import tkinter as tk
 from tkinter import ttk
 
-from data import DataManager
-from view import AppView
-from utils.add_frames import ContentFrame
 
-class App:
+
+class LogicApp():
     def __init__(self, root):
-        # Инициализация главного окна
         self.root = root
-        self.root.title("Дизайн Электрик")
-        self.root.geometry("286x800")
-        self.root.resizable(True, False)
-        self.root.minsize(286, 800)
-        self.root.style = ttk.Style()
-        #self.root.style.theme_use("clam")
-        self.data = DataManager()
-        self.saved_data = {}
-
-        
-        # Инициализация интерфейса
-        self.view = AppView(self.root, self)
-        
-        # Создание виджетов
-        self.frames = ContentFrame(self.view, self.data, self)
+    
 
     def show_right_frames(self, name):
         """ Отображает правый фрейм и обновляет состояние. """
@@ -59,10 +42,3 @@ class App:
 
         f=self.frames.frames[name]
         f.grid(row=0, column=0, sticky="nsew")
-
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = App(root)
-    root.mainloop()
-    root.quit()

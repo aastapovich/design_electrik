@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
-def FrameHome(right_frame_home, saved_data):
+def FrameHome(right_frames, saved_data, controller):
+    right_frame_home = right_frames.right_frame_home
     # Верхний фрейм управления
     control_frame = tk.Frame(right_frame_home, relief=tk.SUNKEN, borderwidth=1)
     control_frame.pack(side="top", fill=tk.X)

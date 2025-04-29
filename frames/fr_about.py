@@ -9,7 +9,7 @@ frames/fr_about.py
 """
 bg_image = None
 
-def FrameAbout(parent):
+def FrameAbout(parent, controller):
     """ Фрейм с информацией о программе. """
     global bg_image  # Объявляем bg_image как глобальную переменную
     about_text = "Дизайн Электрик" \
@@ -18,8 +18,8 @@ def FrameAbout(parent):
         "электрических сетей\n" \
         "гражданских и промышленных\n" \
         "объектов.\n"
-    frame_about = ttk.Frame(parent, relief=tk.SUNKEN, borderwidth=1)
-    frame_about.grid(row=0, column=0, sticky='nsew') 
+    frame_about = ttk.Frame(parent)
+
     
     if not bg_image:
         bg_image = load_image()  # Загружаем изображение, если оно еще не загружено

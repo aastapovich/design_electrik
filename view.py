@@ -4,47 +4,67 @@ import tkinter as tk
 from tkinter import ttk
 
 
-class AppView():
-    def __init__(self, root):
-        self.root = root
-        
-        # Основной фрейм с двумя колонками: левая – для вкладок Виджетов, правая – для таблицы
-        self.main_frame = ttk.Frame(self.root)
-        self.main_frame.pack(fill=tk.BOTH, expand=True)
-        self.main_frame.columnconfigure(0, weight=0)
-        self.main_frame.columnconfigure(1, weight=2)
-        self.main_frame.rowconfigure(0, weight=1)
+class AppView(ttk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)        
+        self.controller = controller
+        self.parent = parent
 
-        # Левый фрейм для Виджетов (SUNKEN, RAISED, GROOVE, RIDGE) - тип границы фрейма
-        self.viget_frame = ttk.Frame(self.main_frame, width=270, relief=tk.SUNKEN, borderwidth=1)
+        """ Создание интерфейса главного окна программы. """        
+        # Основной фрейм с двумя колонками: левая – для вкладок Виджетов, правая – для таблицы
+
+  
+        # Левый фрейм для Виджетов
+        self.left_frame = ttk.Frame(self.parent, width=280)
+        self.left_frame.grid(row=0, column=0, sticky="ns", padx=3, pady=3)
+        # Фрейм для правого окна
+        self.right_frame = ttk.Frame(self.parent)
+        self.right_frame.grid(row=0, column=1, sticky="nsew", padx=3, pady=3)
+        # Настройка растяжения фреймов
+        self.parent.grid_rowconfigure(0, weight=1)
+        self.parent.grid_columnconfigure(1, weight=1)
+
+
+        self.viget_frame = ttk.Frame(self.left_frame)
         self.viget_frame.grid(row=0, column=0, sticky="nsew", padx=3, pady=3)
 
+        self.left_frame.grid_rowconfigure(0, weight=1)  # Верхний фрейм растягивается
+        self.left_frame.grid_rowconfigure(1, weight=0)  # Средний фрейм фиксирован
+        self.left_frame.grid_rowconfigure(2, weight=0)  # Нижний фрейм фиксирован
+        self.left_frame.grid_columnconfigure(0, weight=1)  # Фиксируем ширину левого фрейма     
+        
         # Нижний фрейм для рабочих кнопок
-        self.main_but_frame = ttk.Frame(self.viget_frame)
-        self.main_but_frame.grid(row=1, column=0, sticky="nsew", padx=3, pady=3)#.pack(fill='x')
+        self.main_but_frame = ttk.Frame(self.left_frame)
+        self.main_but_frame.grid(row=1, column=0, sticky="ew", padx=3, pady=3)
 
         # Фрейм для нижних кнопок левого фрейма
-        self.button_frame_left = ttk.Frame(self.viget_frame, relief=tk.SUNKEN, borderwidth=1)
-        self.button_frame_left.grid(row=2, column=0, sticky="nsew", padx=3, pady=3)
+        self.button_frame_left = ttk.Frame(self.left_frame, relief=tk.SUNKEN, borderwidth=1)
+        self.button_frame_left.grid(row=2, column=0, sticky="ew", padx=3, pady=3)
+
 
         # Нижние кнопки левого фрейма
         btn_cancel = ttk.Button(self.button_frame_left, text="Выход", command=self.quit)
         btn_apply = ttk.Button(self.button_frame_left, text="Сохранить", command=self.on_save)
-        btn_cancel.pack(side='left', expand=True, padx=3, pady=3)
-        btn_apply.pack(side='right', expand=True, padx=3, pady=3)
+        btn_cancel.grid(row=0, column=0, sticky='ew')
+        btn_apply.grid(row=0, column=1, sticky='ew')
+        
+        self.button_frame_left.grid_columnconfigure(0, weight=1)
+        self.button_frame_left.grid_columnconfigure(1, weight=1)
+        
+        # Фрейм для таблицы правого фрейма
+        self.right_frame_table = ttk.Frame(self.right_frame, relief=tk.SUNKEN, borderwidth=1)
+        # Фрейм для комнат правого фрейма
+        self.right_frame_room = ttk.Frame(self.right_frame, relief=tk.SUNKEN, borderwidth=1)
+        # Фрейм для домов правого фрейма
+        self.right_frame_home = ttk.Frame(self.right_frame, relief=tk.SUNKEN, borderwidth=1)
+     
 
-
-        # Фрейм для содержимого правого фрейма
-        self.right_frames = ttk.Frame(self.main_frame, relief=tk.SUNKEN, borderwidth=1)
-        self.right_frames.grid(row=0, column=1, sticky="nsew", padx=3, pady=3)
-
-
-
-    # Обработка нажатия кнопки "Применить"
+    # Обработка нажатия кнопки "Сохранить"
     def on_save(self):
-        print(type(self.frames))
+        print("Сохранить")
 
     # Обработка нажатия кнопки "Выход"
     def quit(self):
-        self.root.quit()
+        print("Выход")
+        self.controller.root.quit()
 

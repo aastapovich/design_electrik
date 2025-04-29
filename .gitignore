@@ -1,2 +1,6 @@
 /.vscode
 /__pycache__
+utils/__pycache__
+data/__pycache__
+frames/__pycache__
+/temp

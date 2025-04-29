@@ -58,18 +58,18 @@ class TableManager:
 
     def update_saved_check(self, name, var):
         value = not var.get()
-        saved_data[name] = saved_data[name] = saved_data[name][0], value, saved_data[name][2]
+        saved_data[name][1] = value
         self.sync_table(saved_data)
 
     def update_saved_data(self, name, widget):
         if isinstance(widget, ttk.Radiobutton):
             value = widget.cget('text')
-            saved_data[name] = saved_data[name][0], value, saved_data[name][2]
+            saved_data[name][1] = value
         elif isinstance(widget, ttk.Checkbutton):
             return # Переменные Checkbutton обрабатываются в update_saved_check
         else:
             value = widget.get()
-            saved_data[name] = saved_data[name][0], value, saved_data[name][2]
+            saved_data[name][1] =  value
         # Синхронизируем таблицу
         self.sync_table(saved_data)
         return(saved_data)

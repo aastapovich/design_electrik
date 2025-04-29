@@ -2,16 +2,15 @@
 import tkinter as tk
 from tkinter import ttk
 
-from logic_table import TableManager
+from logic.logic_table import TableManager
 
-def FrameAdditional(parent, saved_data):
+def FrameAdditional(parent, saved_data, controller, r_frames):
     """ Фрейм с Дополнительными настройками. """
 
-    # Основной фрейм
-    frame_additional = ttk.Frame(parent, relief=tk.SUNKEN, borderwidth=1)
-    frame_additional.grid(row=0, column=0, sticky='nsew')
+    frame_additional = ttk.Frame(parent)
+
     # Заголовок панели
-    lbl_title = ttk.Label(frame_additional, text="Дополнительно")
+    lbl_title = ttk.Label(frame_additional, text="Дополнительно", font=("Arial", 14, "bold"))
     lbl_title.pack(anchor='w', padx=10, pady=5)
 
     # Тема  интерфейса
@@ -43,18 +42,13 @@ def FrameAdditional(parent, saved_data):
     btn_apply = ttk.Button(frame_additional, text="Изменить", command=apply_settings)
     btn_apply.pack(anchor='w', padx=20, pady=10)
     # Кнопка изменения таблицы
-    btn_apply = ttk.Button(frame_additional, text="Таблица", command=show_table)
+    btn_apply = ttk.Button(frame_additional, text="Таблица", command=lambda: controller.show_right_frames("Таблица"))
     btn_apply.pack(anchor='w', padx=20, pady=10)
 
     return frame_additional
 
 def apply_settings():
     print("Тема интерфейса изменена")
-
-# Показываем/скрываем таблицу
-def show_table():
-    import logic_app
-    logic_app.LogicApp.show_right_frames("Таблица")
 
 # синхронизируем таблицу
 def update_saved_data(name, widget):
